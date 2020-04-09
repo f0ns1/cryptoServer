@@ -285,11 +285,11 @@ public class OperationsController {
 			JSONObject json = new JSONObject(inputData);
 			String in = json.getString("data");
 			String type = json.getString("alg");
-			Hash hash = new Hash(alg);
+			Hash hash = new Hash(type);
 			status = hash.hashAction(in);
 			logData = HEADER + "hashServiceController()  response = " + data;
 			log.info(logData);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logData = HEADER + "decodeCOntroller() exception " + e.getMessage();
 			log.severe(logData);
 		}
