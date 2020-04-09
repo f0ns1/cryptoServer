@@ -1,3 +1,26 @@
+
+function hashData() {
+	var data = document.getElementById('data');
+	var alg = document.getElementById('alg');
+	var http = new XMLHttpRequest();
+	var url = '/services/hash-service';
+	http.open('POST', url, true);
+	// Send the proper header information along with the request
+	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.onreadystatechange = function() {// Call a function when the state
+		// changes.
+		if (http.readyState == 4) {
+			alert(http.responseText);
+			document.getElementById('hashData').value = http.responseText;
+			document.getElementById('hashTable').style.display = "block";
+		}
+	}
+	alert('{"data":"' + data.value + '","alg":"' + alg.value + '"}');
+	http.send('{"data":"' + data.value + '","alg":"' + alg.value + '"}');
+
+}
+
+
 function encodeData() {
 	var data = document.getElementById('data');
 	var alg = document.getElementById('alg');
