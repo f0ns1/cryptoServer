@@ -1,3 +1,45 @@
+function encodeData() {
+	var data = document.getElementById('data');
+	var alg = document.getElementById('alg');
+	var http = new XMLHttpRequest();
+	var url = '/services/encode-service';
+	http.open('POST', url, true);
+	// Send the proper header information along with the request
+	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.onreadystatechange = function() {// Call a function when the state
+		// changes.
+		if (http.readyState == 4) {
+			alert(http.responseText);
+			document.getElementById('encodeData').value = http.responseText;
+			document.getElementById('encodeTable').style.display = "block";
+		}
+	}
+	alert('{"data":"' + data.value + '","alg":"' + alg.value + '"}');
+	http.send('{"data":"' + data.value + '","alg":"' + alg.value + '"}');
+
+}
+
+function decodeData() {
+	var data = document.getElementById('dataDecode');
+	var alg = document.getElementById('algDecode');
+	var http = new XMLHttpRequest();
+	var url = '/services/decode-service';
+	http.open('POST', url, true);
+	// Send the proper header information along with the request
+	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.onreadystatechange = function() {// Call a function when the state
+		// changes.
+		if (http.readyState == 4) {
+			alert(http.responseText);
+			document.getElementById('decodeData').value = http.responseText;
+			document.getElementById('decodeTable').style.display = "block";
+		}
+	}
+	alert('{"data":"' + data.value + '","alg":"' + alg.value + '"}');
+	http.send('{"data":"' + data.value + '","alg":"' + alg.value + '"}');
+
+}
+
 function signData() {
 	var data = document.getElementById('data');
 	var priv = document.getElementById('priv');
@@ -11,7 +53,7 @@ function signData() {
 	// Send the proper header information along with the request
 	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	http.onreadystatechange = function() {// Call a function when the state
-											// changes.
+		// changes.
 		if (http.readyState == 4) {
 			alert(http.responseText);
 			document.getElementById('signData').value = http.responseText;
@@ -36,7 +78,7 @@ function verifySign() {
 	// Send the proper header information along with the request
 	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	http.onreadystatechange = function() {// Call a function when the state
-											// changes.
+		// changes.
 		if (http.readyState == 4) {
 			alert(http.responseText);
 			document.getElementById('verifySignData').value = http.responseText;
@@ -64,7 +106,7 @@ function decryptData() {
 	// Send the proper header information along with the request
 	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	http.onreadystatechange = function() {// Call a function when the state
-											// changes.
+		// changes.
 		if (http.readyState == 4) {
 			alert(http.responseText);
 			document.getElementById('decryptData').value = http.responseText;
@@ -92,7 +134,7 @@ function decryptEnvelopData() {
 	// Send the proper header information along with the request
 	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	http.onreadystatechange = function() {// Call a function when the state
-											// changes.
+		// changes.
 		if (http.readyState == 4) {
 			alert(http.responseText);
 			document.getElementById('decryptEnvelopDataEnv').value = http.responseText;
@@ -120,7 +162,7 @@ function envEncrypt() {
 	// Send the proper header information along with the request
 	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	http.onreadystatechange = function() {// Call a function when the state
-											// changes.
+		// changes.
 		if (http.readyState == 4) {
 			alert(http.responseText);
 			document.getElementById('envDataOut').value = http.responseText;
@@ -149,7 +191,7 @@ function execEncrypt() {
 	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
 	http.onreadystatechange = function() {// Call a function when the state
-											// changes.
+		// changes.
 		if (http.readyState == 4) {
 			alert(http.responseText);
 			document.getElementById('encData').value = http.responseText;
@@ -176,7 +218,7 @@ function execCert() {
 	http.open('POST', url, true);
 	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	http.onreadystatechange = function() {// Call a function when the state
-											// changes.
+		// changes.
 		if (http.readyState == 4) {
 			alert(http.responseText);
 			document.getElementById('certB64').value = http.responseText;
@@ -202,7 +244,7 @@ function execKeypair() {
 	http.setRequestHeader('Content-type', 'application/json');
 
 	http.onreadystatechange = function() {// Call a function when the state
-											// changes.
+		// changes.
 		if (http.readyState == 4) {
 			alert(http.responseText);
 			document.getElementById('keyB64').value = http.responseText;
@@ -210,7 +252,7 @@ function execKeypair() {
 		}
 	}
 	alert('{"name":"' + name.value + '","validity":"' + validity.value
-	+ '","size":"' + size.value + '","operation":"keyPair"}')
+			+ '","size":"' + size.value + '","operation":"keyPair"}')
 	http.send('{"name":"' + name.value + '","validity":"' + validity.value
 			+ '","size":"' + size.value + '","operation":"keyPair"}');
 

@@ -232,7 +232,7 @@ public class OperationsController {
 			log.info(logData);
 			JSONObject json = new JSONObject(inputData);
 			String in = json.getString("data");
-			String type = json.getString("type");
+			String type = json.getString("alg");
 			Encode encode = new Encode(type);
 			status = encode.encode(in);
 			logData = HEADER + "encodeServiceController() status = " + status;
@@ -258,7 +258,7 @@ public class OperationsController {
 			log.info(logData);
 			JSONObject json = new JSONObject(inputData);
 			String in = json.getString("data");
-			String type = json.getString("type");
+			String type = json.getString("alg");
 			Encode encode = new Encode(type);
 			status = encode.decode(in);
 			logData = HEADER + "decodeServiceCOntroller() stattus = " + status;
