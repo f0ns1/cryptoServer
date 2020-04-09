@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.crypto.server.cryptoserver.bean.response.ResponseBean;
 import com.crypto.server.cryptoserver.controller.actions.Certificates;
 import com.crypto.server.cryptoserver.controller.actions.Decrypt;
+import com.crypto.server.cryptoserver.controller.actions.Encode;
 import com.crypto.server.cryptoserver.controller.actions.Encrypt;
+import com.crypto.server.cryptoserver.controller.actions.Hash;
 import com.crypto.server.cryptoserver.controller.actions.Sign;
 import com.crypto.server.cryptoserver.utils.Utils;
 
@@ -223,6 +225,22 @@ public class OperationsController {
 	public ResponseBean encodeController(HttpServletRequest request, HttpServletResponse response) {
 		logData = HEADER + "encondeCOntroller() init method";
 		log.info(logData);
+		String status = null;
+		try {
+			String inputData = utl.getDataFromInput(request.getInputStream());
+			logData = HEADER + "encodeServiceController() inptu = " + inputData;
+			log.info(logData);
+			JSONObject json = new JSONObject(inputData);
+			String in = json.getString("data");
+			String type = json.getString("type");
+			Encode encode = new Encode(type);
+			status = encode.encode(data);
+			logData = HEADER + "encodeServiceController() status = " + status;
+			log.info(logData);
+		} catch (IOException e) {
+			logData = HEADER + "encodeController() exception " + e.getMessage();
+			log.severe(logData);
+		}
 		ResponseBean beanResp = new ResponseBean(ENCODE_MAPPING, data);
 		logData = HEADER + "encondeController() response = " + beanResp.getService();
 		log.info(logData);
@@ -233,7 +251,23 @@ public class OperationsController {
 	public ResponseBean decodeServiceController(HttpServletRequest request, HttpServletResponse response) {
 		logData = HEADER + "decodeServiceController() init service";
 		log.info(logData);
-		ResponseBean respBean = new ResponseBean(DECODE_MAPPING, data);
+		String status = null;
+		try {
+			String inputData = utl.getDataFromInput(request.getInputStream());
+			logData = HEADER + "decodeServiceCOntroller() inptu = " + inputData;
+			log.info(logData);
+			JSONObject json = new JSONObject(inputData);
+			String in = json.getString("data");
+			String type = json.getString("type");
+			Encode encode = new Encode(type);
+			status = encode.decode(data);
+			logData = HEADER + "decodeServiceCOntroller() stattus = " + status;
+			log.info(logData);
+		} catch (IOException e) {
+			logData = HEADER + "decodeCOntroller() exception " + e.getMessage();
+			log.severe(logData);
+		}
+		ResponseBean respBean = new ResponseBean(DECODE_MAPPING, status);
 		logData = HEADER + "decodeServiceController() response = " + respBean.getStatus();
 		log.info(logData);
 		return respBean;
@@ -243,6 +277,22 @@ public class OperationsController {
 	public ResponseBean hashServiceController(HttpServletRequest request, HttpServletResponse response) {
 		logData = HEADER + "hashServiceController() init method ";
 		log.info(logData);
+		String status = null;
+		try {
+			String inputData = utl.getDataFromInput(request.getInputStream());
+			logData = HEADER + "hashServiceCOntroller() inptu = " + inputData;
+			log.info(logData);
+			JSONObject json = new JSONObject(inputData);
+			String in = json.getString("data");
+			String type = json.getString("alg");
+			Hash hash = new Hash(alg);
+			status = hash.hashAction(data);
+			logData = HEADER + "hashServiceController()  response = " + data;
+			log.info(logData);
+		} catch (IOException e) {
+			logData = HEADER + "decodeCOntroller() exception " + e.getMessage();
+			log.severe(logData);
+		}
 		ResponseBean bean = new ResponseBean(HASH_MAPPING, data);
 		logData = HEADER + "hashServiceController() response " + bean.getStatus();
 		log.info(logData);
