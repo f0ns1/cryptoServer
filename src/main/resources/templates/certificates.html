@@ -1,0 +1,168 @@
+<html>
+
+<!-- Bootstrap core CSS -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script
+	src='js/application.js'></script>
+<header>
+	<div align="center" style="width: 75%">
+		<h1 style="color: red;">
+			<marquee>
+				<strong> Cryptographic application server </strong>
+			</marquee>
+		</h1>
+
+	</div>
+</header>
+
+<body style="background-image: url('img/background.jpg');">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<div id="mySidenav" class="sidenav">
+		<a style="font-size: 30px"><strong>Server Operations:</strong></a>
+		<hr style="border-top: 1px solid red;" />
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="encrypt">Encryption</a> <a href="decrypt">Decryption</a> <a
+			href="sign">Sign</a> <a href="certificates">Certificates</a> <a
+			href="contact">Contact</a>
+	</div>
+	<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;
+		<h5 style="color: white;">
+			<strong>Menu</strong>
+		</h5>
+	</span>
+	<br />
+	<br />
+	<div align="center">
+		<div align="center">
+			<h3 style="color: red;">
+				<strong>Certificates</strong>
+			</h3>
+		</div>
+		<hr style="border-top: 1px solid red;" />
+		<!-- Add web content -->
+
+		<table class="table table-dark" style="width: 80%;">
+			<caption>
+				<strong><h5 style="color: white;">JDK engine</h5></strong>
+			</caption>
+			<tr>
+
+				<th>
+					<div align="center">
+						<label for="nameCert"> Self signed Name:</label> <input type="text"
+							id="nameCert" name="nameCert" value="CN=ROOT"></input>
+					</div>
+				</th>
+				<th>
+					<div align="center">
+						<label for="validCert"> validity :</label> <input type="text"
+							id="validityCert" name="valididtyCert" value="365"></input>
+					</div>
+				</th>
+				<th>
+					<div align="center">
+						<label for="sizeCert"> size:</label> <input type="text" id="sizeCert"
+							name="sizeCert" value="2048"></input>
+					</div>
+
+				</th>
+
+				<th>
+					<div align="center">
+						<input type="button" onclick="execCert()"
+							value="Generate SelfSigned  cert" />
+					</div>
+
+				</th>
+			</tr>
+		</table>
+
+		<div style="display: none;" id="certTable">
+			<table class="table table-dark" style="width: 80%;">
+				<tr>
+					<th align="center">
+						<h3 style="color: red;">
+							<strong>certificate</strong>
+						</h3>
+					</th>
+					<th>
+					<textarea rows="10" cols="80" id="certB64" name="certB64" ></textarea>
+					</th>
+				</tr>
+			</table>
+		</div>
+		<div align="center">
+			<h3 style="color: red;">
+				<strong>KeyPair</strong>
+			</h3>
+		</div>
+		<hr style="border-top: 1px solid red;" />
+
+		<table class="table table-dark" style="width: 80%;">
+			<caption>
+				<strong><h5 style="color: white;">JDK engine</h5></strong>
+			</caption>
+			<tr>
+
+				<th>
+					<div align="center">
+						<label for="name"> Self signed Name:</label> <input type="text"
+							id="name" name="name" value="CN=ROOT"></input>
+					</div>
+				</th>
+				<th>
+					<div align="center">
+						<label for="valid"> validity :</label> <input type="text"
+							id="validity" name="valididty" value="365"></input>
+					</div>
+				</th>
+				<th>
+					<div align="center">
+						<label for="size"> size:</label> <input type="text" id="size"
+							name="size" value="2048"></input>
+					</div>
+
+				</th>
+
+				<th>
+
+					<div align="center">
+						<input type="button" onclick="execKeypair()" value="Generate keyPair" />
+					</div>
+
+
+				</th>
+			</tr>
+		</table>
+		<div style="display: none;" id="keyTable">
+			<table class="table table-dark" style="width: 80%;">
+				<tr>
+					<th align="center">
+						<h3 style="color: red;">
+							<strong>certificate</strong>
+						</h3>
+					</th>
+					<th><textarea rows="10" cols="80" id="keyB64" name="certB64"> </textarea>
+					</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+
+</body>
+
+
+
+</html>

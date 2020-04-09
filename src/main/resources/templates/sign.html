@@ -1,0 +1,179 @@
+<html>
+
+<!-- Bootstrap core CSS -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src='js/application.js'></script>
+<header>
+	<div align="center" style="width: 75%">
+		<h1 style="color: red;">
+			<marquee>
+				<strong> Cryptographic application server </strong>
+			</marquee>
+		</h1>
+
+	</div>
+</header>
+
+<body style="background-image: url('img/background.jpg');">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<div id="mySidenav" class="sidenav">
+		<a style="font-size: 30px"><strong>Server Operations:</strong></a>
+		<hr style="border-top: 1px solid red;" />
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="encrypt">Encryption</a> <a href="decrypt">Decryption</a> <a
+			href="sign">Sign</a> <a href="certificates">Certificates</a> <a
+			href="contact">Contact</a>
+	</div>
+	<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;
+		<h5 style="color: white;">
+			<strong>Menu</strong>
+		</h5>
+	</span>
+	<br />
+	<br />
+	<div align="center">
+		<div align="center">
+			<h3 style="color: red;">
+				<strong>Sign</strong>
+			</h3>
+		</div>
+		<hr style="border-top: 1px solid red;" />
+
+
+		<!-- Add web content -->
+		<table class="table table-dark" style="width: 80%;">
+			<caption>
+				<strong><h5 style="color: white;">JDK engine</h5></strong>
+			</caption>
+			<tr>
+				<th>
+					<h5>Algorithm type :</h5> <select id="alg">
+						<option value="RSA">RSA</option>
+				</select>
+
+				</th>
+				<th>
+
+					<div align="center">
+						<label for="data">Data to sign :</label>
+						<textarea id="data" name="data" rows="4" cols="50"></textarea>
+					</div>
+					<div align="center">
+						<label for="myfile">Select a file:</label> <input type="file"
+							id="myfile" name="myfile" />
+					</div>
+
+				</th>
+
+				<th>
+					<div align="center">
+						<label for="priv">private Key B64:</label> <input type="text"
+							id="priv" name="priv" />
+
+					</div>
+
+				</th>
+			</tr>
+		</table>
+		<table class="table">
+			<tr>
+				<th>
+					<div align="center">
+						<input type="button" onClick="signData()" value="sign Data" />
+					</div>
+				</th>
+			</tr>
+		</table>
+		<div id="signTable" align="center" style="display: none;">
+			<table>
+				<tr>
+					<th><textarea rows="10" cols="80" id="signData"></textarea></th>
+				</tr>
+			</table>
+		</div>
+		<br /> <br />
+
+		<div align="center">
+			<h3 style="color: red;">
+				<strong>Verify Sign</strong>
+			</h3>
+		</div>
+		<hr style="border-top: 1px solid red;" />
+
+
+		<!-- Add web content -->
+		<table class="table table-dark" style="width: 80%;">
+			<caption>
+				<strong><h5 style="color: white;">JDK engine</h5></strong>
+			</caption>
+			<tr>
+				<th>
+					<h5>Algorithm type :</h5> <select id="alg">
+						<option value="RSA">RSA</option>
+				</select>
+
+				</th>
+				<th>
+
+					<div align="center">
+						<label for="data">Original data :</label>
+						<textarea id="data" rows="4" cols="50"></textarea>
+					</div>
+					<div align="center">
+						<label for="dataSign">Sign data :</label>
+						<textarea id="dataSign" rows="4" cols="53"></textarea>
+					</div>
+
+				</th>
+
+				<th>
+					<div align="center">
+						<label for="pub">public Key B64:</label> <input type="text"
+							id="pub" name="pub" />
+
+					</div>
+
+				</th>
+			</tr>
+		</table>
+		<table class="table">
+			<tr>
+				<th>
+					<div align="center">
+						<input type="button" onclick="verifySign()" value="verify sign" />
+					</div>
+				</th>
+			</tr>
+		</table>
+	</div>
+	<div id="verifySignTable" align="center" style="display: none;">
+		<table>
+			<tr>
+				<th><textarea rows="10" cols="80" id="verifySignData"></textarea></th>
+			</tr>
+		</table>
+	</div>
+	<br />
+	<br />
+	<br />
+
+</body>
+<script>
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	function closeNav() {
+		document.getElementById("mySidenav").style.width = "0";
+	}
+</script>
+</html>

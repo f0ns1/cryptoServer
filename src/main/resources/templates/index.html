@@ -1,0 +1,191 @@
+<html>
+
+<!-- Bootstrap core CSS -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<header>
+	<div align="center" style="width: 75%">
+		<h1 style="color: red;">
+			<marquee>
+				<strong> Cryptographic application server </strong>
+			</marquee>
+		</h1>
+
+	</div>
+</header>
+<style>
+body {
+	font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+}
+
+.sidenav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+.sidenav a:hover {
+	color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 18px;
+	}
+}
+</style>
+<body style="background-image: url('img/background.jpg');">
+
+	<div id="mySidenav" class="sidenav">
+		<a style="font-size: 30px"><strong>Server Operations:</strong></a>
+		<hr style=" border-top: 1px solid red;"/>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="encrypt">Encryption</a> 
+		<a href="decrypt">Decryption</a> 
+		<a href="sign">Sign</a>
+		<a href="certificates">Certificates</a> 
+		<a href="contact">Contact</a>
+	</div>
+	<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776; <h5 style="color: white;"><strong>Menu</strong></h5></span>
+	<br />
+	<br />
+	<div align="center">
+
+		<table class="table table-dark" style="width: 80%;">
+			<caption>Encryption Block</caption>
+			<tr>
+				<th>
+					<h5>Algorithm type :</h5> <select id="alg">
+						<option value="3DES">3DES</option>
+						<option value="AES">AES</option>
+						<option value="RC4">RC4</option>
+						<option value="RC2">RC3</option>
+						<option value="Blowfish">Blowfish</option>
+				</select>
+
+				</th>
+				<th>
+
+					<div align="center">
+						<label for="data">Data to Encrypt :</label>
+						<textarea id="data" rows="4" cols="50"></textarea>
+					</div>
+
+				</th>
+				<th>
+
+					<div align="center">
+						<label for="myfile">Select a file:</label> <input type="file"
+							id="myfile" name="myfile" />
+
+					</div>
+
+				</th>
+			</tr>
+		</table>
+		<br />
+
+		<table class="table">
+			<tr>
+				<th>
+					<div align="center">
+						<input type="button" value="Encrypt Data" />
+					</div>
+				</th>
+			</tr>
+		</table>
+
+		<br /> <br />
+		<table class="table table-dark" style="width: 80%;">
+			<caption>Decryption Block</caption>
+			<tr>
+				<th>
+					<h5>Algorithm type :</h5> <select id="alg">
+						<option value="3DES">3DES</option>
+						<option value="AES">AES</option>
+						<option value="RC4">RC4</option>
+						<option value="RC2">RC3</option>
+						<option value="Blowfish">Blowfish</option>
+				</select>
+
+				</th>
+				<th>
+
+					<div align="center">
+						<label for="data">Data to decrypt :</label>
+						<textarea id="data" rows="4" cols="50"></textarea>
+					</div>
+
+				</th>
+				<th>
+
+					<div align="center">
+						<label for="myfile">Select a file:</label> <input type="file"
+							id="myfile" name="myfile" />
+
+					</div>
+
+				</th>
+			</tr>
+		</table>
+		<br />
+		<table class="table">
+			<tr>
+				<th>
+					<div align="center">
+						<input type="button" value="Decrypt Data" />
+					</div>
+				</th>
+			</tr>
+		</table>
+	</div>
+	<br />
+	<br />
+	<br />
+
+</body>
+<script>
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	function closeNav() {
+		document.getElementById("mySidenav").style.width = "0";
+	}
+</script>
+</html>
