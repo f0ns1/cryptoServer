@@ -234,14 +234,14 @@ public class OperationsController {
 			String in = json.getString("data");
 			String type = json.getString("type");
 			Encode encode = new Encode(type);
-			status = encode.encode(data);
+			status = encode.encode(in);
 			logData = HEADER + "encodeServiceController() status = " + status;
 			log.info(logData);
 		} catch (IOException e) {
 			logData = HEADER + "encodeController() exception " + e.getMessage();
 			log.severe(logData);
 		}
-		ResponseBean beanResp = new ResponseBean(ENCODE_MAPPING, data);
+		ResponseBean beanResp = new ResponseBean(ENCODE_MAPPING, status);
 		logData = HEADER + "encondeController() response = " + beanResp.getService();
 		log.info(logData);
 		return beanResp;
@@ -260,7 +260,7 @@ public class OperationsController {
 			String in = json.getString("data");
 			String type = json.getString("type");
 			Encode encode = new Encode(type);
-			status = encode.decode(data);
+			status = encode.decode(in);
 			logData = HEADER + "decodeServiceCOntroller() stattus = " + status;
 			log.info(logData);
 		} catch (IOException e) {
@@ -286,14 +286,14 @@ public class OperationsController {
 			String in = json.getString("data");
 			String type = json.getString("alg");
 			Hash hash = new Hash(alg);
-			status = hash.hashAction(data);
+			status = hash.hashAction(in);
 			logData = HEADER + "hashServiceController()  response = " + data;
 			log.info(logData);
 		} catch (IOException e) {
 			logData = HEADER + "decodeCOntroller() exception " + e.getMessage();
 			log.severe(logData);
 		}
-		ResponseBean bean = new ResponseBean(HASH_MAPPING, data);
+		ResponseBean bean = new ResponseBean(HASH_MAPPING, status);
 		logData = HEADER + "hashServiceController() response " + bean.getStatus();
 		log.info(logData);
 		return bean;

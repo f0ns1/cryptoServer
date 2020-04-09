@@ -60,7 +60,12 @@ public class Encode {
 			if (operation != null && operation.equals(ENCODE)) {
 				ret = encodeHex(data);
 			} else {
-				ret = decodeHex(data);
+				try {
+					ret = decodeHex(data);
+				} catch (DecoderException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			break;
 		case URL:
