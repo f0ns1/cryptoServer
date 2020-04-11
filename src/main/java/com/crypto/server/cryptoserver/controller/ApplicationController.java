@@ -21,7 +21,7 @@ public class ApplicationController {
 	private static final String CONTACT_MAPPING = "/contact";
 	private static final String HASH_MAPPING = "/hash";
 	private static final String ENCODE_MAPPING = "/encode";
-	private static final String CERTIFICATE_MAPPING = "/certificate";
+	private static final String CERTIFICATE_MAPPING = "/certificates";
 
 	@RequestMapping(INDEX_MAPPING)
 	public String index(HttpServletRequest request, HttpServletResponse response) {
