@@ -6,7 +6,7 @@ function hashData() {
 	var url = '/services/hash-service';
 	http.open('POST', url, true);
 	// Send the proper header information along with the request
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
 		if (http.readyState == 4) {
@@ -28,7 +28,7 @@ function encodeData() {
 	var url = '/services/encode-service';
 	http.open('POST', url, true);
 	// Send the proper header information along with the request
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
 		if (http.readyState == 4) {
@@ -49,7 +49,7 @@ function decodeData() {
 	var url = '/services/decode-service';
 	http.open('POST', url, true);
 	// Send the proper header information along with the request
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
 		if (http.readyState == 4) {
@@ -74,7 +74,7 @@ function signData() {
 	var url = '/services/sign-jdk-service';
 	http.open('POST', url, true);
 	// Send the proper header information along with the request
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
 		if (http.readyState == 4) {
@@ -99,7 +99,7 @@ function verifySign() {
 	var url = '/services/sign-jdk-service';
 	http.open('POST', url, true);
 	// Send the proper header information along with the request
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
 		if (http.readyState == 4) {
@@ -127,7 +127,7 @@ function decryptData() {
 	var url = '/services/decrypt-jdk-service';
 	http.open('POST', url, true);
 	// Send the proper header information along with the request
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
 		if (http.readyState == 4) {
@@ -155,7 +155,7 @@ function decryptEnvelopData() {
 	var url = '/services/decrypt-bc-service';
 	http.open('POST', url, true);
 	// Send the proper header information along with the request
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
 		if (http.readyState == 4) {
@@ -183,7 +183,7 @@ function envEncrypt() {
 	var url = '/services/encrypt-bc-service';
 	http.open('POST', url, true);
 	// Send the proper header information along with the request
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
 		if (http.readyState == 4) {
@@ -211,7 +211,7 @@ function execEncrypt() {
 	http.open('POST', url, true);
 
 	// Send the proper header information along with the request
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
@@ -239,7 +239,7 @@ function execCert() {
 	var http = new XMLHttpRequest();
 	var url = '/services/certificates-jdk-service';
 	http.open('POST', url, true);
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function() {// Call a function when the state
 		// changes.
 		if (http.readyState == 4) {

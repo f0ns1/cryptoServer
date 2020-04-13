@@ -1,24 +1,23 @@
 package com.crypto.server.cryptoserver.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.security.Security;
 import java.util.logging.Logger;
 
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.json.JSONObject;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.crypto.server.cryptoserver.bean.request.CertificateBean;
+import com.crypto.server.cryptoserver.bean.request.DecryptBean;
+import com.crypto.server.cryptoserver.bean.request.EncodeBean;
+import com.crypto.server.cryptoserver.bean.request.EncryptBean;
+import com.crypto.server.cryptoserver.bean.request.HashBean;
+import com.crypto.server.cryptoserver.bean.request.SignBean;
 import com.crypto.server.cryptoserver.bean.response.ResponseBean;
 import com.crypto.server.cryptoserver.controller.actions.Certificates;
 import com.crypto.server.cryptoserver.controller.actions.Decrypt;
@@ -58,16 +57,14 @@ public class OperationsController {
 	}
 
 	@RequestMapping(value = ENCRYPT_MAPPING, method = RequestMethod.POST)
-	public ResponseBean encryptServiceJDKController(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean encryptServiceJDKController(@RequestBody EncryptBean body, HttpServletResponse response) {
 		logData = HEADER + "encryptServiceJDKControler() init method ";
 		log.info(logData);
 		try {
-			String dataIn = utl.getDataFromInput(request.getInputStream());
-			JSONObject jsonInput = new JSONObject(dataIn);
-			type = jsonInput.getString("alg");
-			data = jsonInput.getString("data");
-			publicKey = jsonInput.getString("pub");
-			privateKey = jsonInput.getString("priv");
+			type = body.getAlg();
+			data = body.getData();
+			publicKey = body.getPub();
+			privateKey = body.getPriv();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -80,17 +77,15 @@ public class OperationsController {
 	}
 
 	@RequestMapping(value = ENCRYPT_BC_MAPPING, method = RequestMethod.POST)
-	public ResponseBean encryptServiceBCController(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean encryptServiceBCController(@RequestBody EncryptBean bean, HttpServletResponse response) {
 		log.info("crypto application server !!");
 		log.info(HEADER + "decryptServiceJDKController() init method ");
 		try {
-			String dataIn = utl.getDataFromInput(request.getInputStream());
-			JSONObject jsonInput = new JSONObject(dataIn);
-			type = jsonInput.getString("alg");
-			data = jsonInput.getString("data");
-			publicKey = jsonInput.getString("pub");
-			privateKey = jsonInput.getString("priv");
-			certificate = jsonInput.getString("certificate");
+			type = bean.getAlg();
+			data = bean.getData();
+			publicKey = bean.getPub();
+			privateKey = bean.getPriv();
+			certificate = bean.getCertificate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,21 +101,18 @@ public class OperationsController {
 	}
 
 	@RequestMapping(value = DECRYPT_MAPPING, method = RequestMethod.POST)
-	public ResponseBean decryptServiceJDKController(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean decryptServiceJDKController(@RequestBody DecryptBean bean, HttpServletResponse response) {
 		log.info("crypto application server !!");
 		logData = HEADER + "decryptServiceJDKController() init method ";
 		log.info(logData);
 		try {
-			String dataIn = utl.getDataFromInput(request.getInputStream());
-			JSONObject jsonInput = new JSONObject(dataIn);
-			type = jsonInput.getString("alg");
-			data = jsonInput.getString("data");
-			publicKey = jsonInput.getString("pub");
-			privateKey = jsonInput.getString("priv");
+			type = bean.getAlg();
+			data = bean.getData();
+			publicKey = bean.getPub();
+			privateKey = bean.getPriv();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		Decrypt dec = new Decrypt(type, privateKey, publicKey);
 		String dataDecrypted = dec.decrypt(data, "B64");
 		ResponseBean resp = new ResponseBean(DECRYPT_MAPPING, dataDecrypted);
@@ -132,18 +124,15 @@ public class OperationsController {
 	}
 
 	@RequestMapping(value = DECRYPT_BC_MAPPING, method = RequestMethod.POST)
-	public ResponseBean decryptServiceBCController(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean decryptServiceBCController(@RequestBody DecryptBean bean, HttpServletResponse response) {
 		logData = HEADER + "decryptServiceJDKController() init method ";
 		log.info(logData);
-
 		try {
-			String dataIn = utl.getDataFromInput(request.getInputStream());
-			JSONObject jsonInput = new JSONObject(dataIn);
-			alg = jsonInput.getString("alg");
-			data = jsonInput.getString("data");
-			publicKey = jsonInput.getString("pub");
-			privateKey = jsonInput.getString("priv");
-			certificate = jsonInput.getString("certificate");
+			alg = bean.getAlg();
+			data = bean.getData();
+			publicKey = bean.getPub();
+			privateKey = bean.getPriv();
+			certificate = bean.getCertificate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -157,19 +146,17 @@ public class OperationsController {
 	}
 
 	@RequestMapping(value = SIGN_MAPPING, method = RequestMethod.POST)
-	public ResponseBean signServiceJDKController(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean signServiceJDKController(@RequestBody SignBean bean, HttpServletResponse response) {
 		logData = HEADER + "signServiceController() init method ";
 		log.info(logData);
 		try {
-			String dataIn = utl.getDataFromInput(request.getInputStream());
-			JSONObject jsonInput = new JSONObject(dataIn);
-			type = jsonInput.getString("type");
-			data = jsonInput.getString("data");
+			type = bean.getType();
+			data = bean.getData();
 			if (type.equals("sign")) {
-				privateKey = jsonInput.getString("priv");
+				privateKey = bean.getPriv();
 			} else {
-				publicKey = jsonInput.getString("pub");
-				dataSign = jsonInput.getString("dataSign");
+				publicKey = bean.getPub();
+				dataSign = bean.getDataSign();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -193,18 +180,16 @@ public class OperationsController {
 	}
 
 	@RequestMapping(value = CERTIFICATES_MAPPING, method = RequestMethod.POST)
-	public ResponseBean certificatesController(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean certificatesController(@RequestBody CertificateBean bean, HttpServletResponse response) {
 		logData = HEADER + "certificatesController() init method ";
 		log.info(logData);
 		JSONObject certificate = null;
 		try {
-			String dataIn = utl.getDataFromInput(request.getInputStream());
-			JSONObject jsonInput = new JSONObject(dataIn);
-			String operation = jsonInput.getString("operation");
-			String name = jsonInput.getString("name");
+			String operation = bean.getOperation();
+			String name = bean.getName();
 			String type = "RSA";
-			String validity = jsonInput.getString("validity");
-			String size = jsonInput.getString("size");
+			String validity = bean.getValidity();
+			String size = bean.getSize();
 			Certificates cert = new Certificates(name, type, Integer.parseInt(validity), Integer.parseInt(size));
 			if (operation != null && operation.equals("certificate")) {
 				certificate = cert.generateCertificate();
@@ -222,22 +207,18 @@ public class OperationsController {
 	}
 
 	@RequestMapping(value = ENCODE_MAPPING, method = RequestMethod.POST)
-	public ResponseBean encodeController(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean encodeController(@RequestBody EncodeBean bean, HttpServletResponse response) {
 		logData = HEADER + "encondeCOntroller() init method";
 		log.info(logData);
 		String status = null;
 		try {
-			String inputData = utl.getDataFromInput(request.getInputStream());
-			logData = HEADER + "encodeServiceController() inptu = " + inputData;
-			log.info(logData);
-			JSONObject json = new JSONObject(inputData);
-			String in = json.getString("data");
-			String type = json.getString("alg");
+			String in = bean.getData();
+			String type = bean.getAlg();
 			Encode encode = new Encode(type);
 			status = encode.encode(in);
 			logData = HEADER + "encodeServiceController() status = " + status;
 			log.info(logData);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logData = HEADER + "encodeController() exception " + e.getMessage();
 			log.severe(logData);
 		}
@@ -248,22 +229,18 @@ public class OperationsController {
 	}
 
 	@RequestMapping(value = DECODE_MAPPING, method = RequestMethod.POST)
-	public ResponseBean decodeServiceController(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean decodeServiceController(@RequestBody EncodeBean bean, HttpServletResponse response) {
 		logData = HEADER + "decodeServiceController() init service";
 		log.info(logData);
 		String status = null;
 		try {
-			String inputData = utl.getDataFromInput(request.getInputStream());
-			logData = HEADER + "decodeServiceCOntroller() inptu = " + inputData;
-			log.info(logData);
-			JSONObject json = new JSONObject(inputData);
-			String in = json.getString("data");
-			String type = json.getString("alg");
+			String in = bean.getData();
+			String type = bean.getAlg();
 			Encode encode = new Encode(type);
 			status = encode.decode(in);
 			logData = HEADER + "decodeServiceCOntroller() stattus = " + status;
 			log.info(logData);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logData = HEADER + "decodeCOntroller() exception " + e.getMessage();
 			log.severe(logData);
 		}
@@ -274,17 +251,13 @@ public class OperationsController {
 	}
 
 	@RequestMapping(value = HASH_MAPPING, method = RequestMethod.POST)
-	public ResponseBean hashServiceController(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean hashServiceController(@RequestBody HashBean bean, HttpServletResponse response) {
 		logData = HEADER + "hashServiceController() init method ";
 		log.info(logData);
 		String status = null;
 		try {
-			String inputData = utl.getDataFromInput(request.getInputStream());
-			logData = HEADER + "hashServiceCOntroller() inptu = " + inputData;
-			log.info(logData);
-			JSONObject json = new JSONObject(inputData);
-			String in = json.getString("data");
-			String type = json.getString("alg");
+			String in = bean.getData();
+			String type = bean.getAlg();
 			Hash hash = new Hash(type);
 			status = hash.hashAction(in);
 			logData = HEADER + "hashServiceController()  response = " + data;
@@ -293,10 +266,10 @@ public class OperationsController {
 			logData = HEADER + "decodeCOntroller() exception " + e.getMessage();
 			log.severe(logData);
 		}
-		ResponseBean bean = new ResponseBean(HASH_MAPPING, status);
-		logData = HEADER + "hashServiceController() response " + bean.getStatus();
+		ResponseBean responseBean = new ResponseBean(HASH_MAPPING, status);
+		logData = HEADER + "hashServiceController() response " + responseBean.getStatus();
 		log.info(logData);
-		return bean;
+		return responseBean;
 	}
 
 }
